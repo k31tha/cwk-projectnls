@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider, Link} from 'react-router-dom';
 import ErrorPage from './components/error/ErrorPage';
-//import './index.css';
-import Root from './components/routes/route';
+
+import Layout from './components/structure/Layout';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
+    element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -34,6 +34,14 @@ const router = createBrowserRouter([
       {
         path: 'blog',
         element: <div>blog</div>,
+      },
+      {
+        path: 'pyramid',
+        element: <div>pyramid page</div>,
+      },
+      {
+        path: 'about',
+        element: <div>about page</div>,
       },
     ],
   },
