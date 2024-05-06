@@ -33,7 +33,7 @@ test('pyramid page of app', async ({page}) => {
 });
 
 test('club page of app for a club', async ({page}) => {
-  await page.goto('http://localhost:5173/club/woking-fc');
+  await page.goto('http://localhost:5173/club/woking');
 
   // Expect a title "to contain" a substring.
   //await expect(page).toHaveTitle(/Playwright/);
