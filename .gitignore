@@ -12,6 +12,7 @@ coverage
 dist
 dist-ssr
 *.local
+.env.testing
 
 # Editor directories and files
 .vscode/*
