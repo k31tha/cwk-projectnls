@@ -6,15 +6,16 @@ const messageSchema = z.object({
   title: z.string(),
   userId: z.number(),
 });
+const API_URL = import.meta.env.VITE_BASE_NLS_API_URL;
 
 export async function getMessageStub() {
-  await fetch('http://cwknls.localhost/message')
+  await fetch(API_URL + '/message')
     .then(response => response.json())
     .then(json => console.log(JSON.stringify(json)));
 }
 
 export async function getMessageStub2() {
-  const response = await fetch('http://cwknls.localhost/message');
+  const response = await fetch(API_URL + '/message');
   const json = await response.json();
   return {
     json: json,
@@ -23,7 +24,7 @@ export async function getMessageStub2() {
 }
 
 export async function getMessageStub500Err() {
-  const response = await fetch('http://cwknls.localhost/message?fail=500');
+  const response = await fetch(API_URL + '/message?fail=500');
   const json = await response.json();
   return {
     json: json,

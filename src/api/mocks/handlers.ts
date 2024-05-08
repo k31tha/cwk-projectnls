@@ -1,9 +1,9 @@
-import {rest} from 'msw';
-import {ClubDetail} from '../club/getClubDetails';
-import {url} from 'inspector';
+import {http, HttpResponse} from 'msw';
+const API_URL = import.meta.env.VITE_BASE_NLS_API_URL;
 export const handlers = [
-  rest.get('http://cwknls.localhost/message', (req, res, ctx) => {
-    const failCode = req.url.searchParams.get('fail');
+  http.get(API_URL + '/message', ({request}) => {
+    const url = new URL(request.url);
+    const failCode = url.searchParams.get('fail');
     let response = {};
     if (failCode === null) {
       response = {
@@ -12,15 +12,21 @@ export const handlers = [
         title: 'Title',
         userId: 1,
       };
-      return res(ctx.status(200), ctx.json(response));
+      //return res(ctx.status(200), ctx.json(response));
+      return HttpResponse.json(response);
     } else {
-      return res(ctx.status(failCode), ctx.json(response));
+      //return res(ctx.status(failCode), ctx.json(response));
+      return new HttpResponse(JSON.stringify(response), {
+        status: Number(failCode),
+      });
     }
   }),
-  rest.get(
-    'http://cwknls.localhost/api/club/:urlFriendlyName',
-    (req, res, ctx) => {
-      const {urlFriendlyName} = req.params;
+  http.get(
+    API_URL + '/api/v2/clubapi/clubfulldetail/:urlFriendlyName',
+    ({params}) => {
+      const {urlFriendlyName} = params;
+      //console.dir(params);
+      //console.dir(urlFriendlyName);
 
       if (urlFriendlyName === 'woking') {
         const responseData = {
@@ -109,7 +115,7 @@ export const handlers = [
           DisableAutoUpdate: false,
           StatusTypeId: 1,
         };
-        return res(ctx.json(responseData));
+        return HttpResponse.json(responseData);
       } else if (urlFriendlyName === 'knaphill-fc') {
         const responseData = {
           ClubSocialLinks: [
@@ -179,9 +185,11 @@ export const handlers = [
           DisableAutoUpdate: false,
           StatusTypeId: 1,
         };
-        return res(ctx.json(responseData));
+        return HttpResponse.json(responseData);
       } else {
-        return res(ctx.status(404));
+        return new HttpResponse(null, {
+          status: 404,
+        });
       }
     },
   ),

@@ -3,11 +3,10 @@ import {
   getMessageStubwithZodSafeParse,
   getMessageStubwithZodParse,
 } from '../getMessage';
+const API_URL = import.meta.env.VITE_BASE_NLS_API_URL;
 describe('Testing message fetch with mock', () => {
   it('Fetch message from stub validate using safe Parse', async () => {
-    const result = await getMessageStubwithZodSafeParse(
-      'http://cwknls.localhost/message',
-    );
+    const result = await getMessageStubwithZodSafeParse(API_URL + '/message');
     expect(result.response.status).toBe(200);
     if (result.message.success) {
       const data = result.message.data;
@@ -17,9 +16,7 @@ describe('Testing message fetch with mock', () => {
   });
 
   it('Fetch message from stub validate using  Parse', async () => {
-    const result = await getMessageStubwithZodParse(
-      'http://cwknls.localhost/message',
-    );
+    const result = await getMessageStubwithZodParse(API_URL + '/message');
     expect(result.response.status).toBe(200);
     if (result.message) {
       const data = result.message;

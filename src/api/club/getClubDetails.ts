@@ -15,16 +15,17 @@ const clubDetailSchema = z.object({
   Nicknames: z.string().nullable(),
   Active: z.boolean().nullable(),
   ClubGuid: z.string().nullable(),
-  MinorClub: z.boolean(),
+  MinorClub: z.boolean().nullable(),
   DisableAutoUpdate: z.boolean(),
   StatusTypeId: z.number().nullable(),
 });
 
 export type ClubDetail = z.infer<typeof clubDetailSchema>;
-
+const API_URL = import.meta.env.VITE_BASE_NLS_API_URL;
 export async function getClubDetails(urlFriendlyName: string) {
   const response = await fetch(
-    `http://cwknls.localhost/api/club/${urlFriendlyName}`,
+    `${API_URL}/api/v2/clubapi/clubfulldetail/${urlFriendlyName}`,
+    {},
   );
 
   if (response.status !== 200) {

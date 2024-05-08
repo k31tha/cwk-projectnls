@@ -1,7 +1,8 @@
 import {test, expect} from '@playwright/test';
+const baseURL = 'http://localhost:' + '3000';
 
 test('root page of app', async ({page}) => {
-  await page.goto('http://localhost:5173/');
+  await page.goto(baseURL + '/');
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/CWK - Project NLS/);
@@ -9,7 +10,7 @@ test('root page of app', async ({page}) => {
 });
 
 test('club search page of app', async ({page}) => {
-  await page.goto('http://localhost:5173/club');
+  await page.goto(baseURL + '/club');
 
   // Expect a title "to contain" a substring.
   //await expect(page).toHaveTitle(/Playwright/);
@@ -17,7 +18,7 @@ test('club search page of app', async ({page}) => {
 });
 
 test('about page of app', async ({page}) => {
-  await page.goto('http://localhost:5173/about');
+  await page.goto(baseURL + '/about');
 
   // Expect a title "to contain" a substring.
   //await expect(page).toHaveTitle(/Playwright/);
@@ -25,23 +26,31 @@ test('about page of app', async ({page}) => {
 });
 
 test('pyramid page of app', async ({page}) => {
-  await page.goto('http://localhost:5173/pyramid');
+  await page.goto(baseURL + '/pyramid');
 
   // Expect a title "to contain" a substring.
   //await expect(page).toHaveTitle(/Playwright/);
   await expect(page.getByText('pyramid page')).toBeVisible();
 });
 
-test('club page of app for a club', async ({page}) => {
-  await page.goto('http://localhost:5173/club/woking');
+test('club page of app for club woking', async ({page}) => {
+  await page.goto(baseURL + '/club/woking');
 
   // Expect a title "to contain" a substring.
   //await expect(page).toHaveTitle(/Playwright/);
-  await expect(page.getByText('club with name')).toBeVisible();
+  await expect(page.getByText('woking')).toBeVisible();
+});
+
+test('club page of app for club knaphill', async ({page}) => {
+  await page.goto(baseURL + '/club/knaphill-fc');
+
+  // Expect a title "to contain" a substring.
+  //await expect(page).toHaveTitle(/Playwright/);
+  await expect(page.getByText('knaphill-fc')).toBeVisible();
 });
 
 test('navigate down to a club from route page', async ({page}) => {
-  await page.goto('http://localhost:5173/');
+  await page.goto(baseURL + '/');
   await expect(page).toHaveTitle(/CWK - Project NLS/);
   await expect(page.locator('#detail').getByText('home')).toBeVisible();
   await page.click('text=club');
