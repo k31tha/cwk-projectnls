@@ -1,5 +1,6 @@
 # Use the official Node.js image
-FROM mcr.microsoft.com/playwright:v1.40.0-jammy
+#FROM mcr.microsoft.com/playwright:v1.40.0-jammy
+FROM node:latest
 
 # Set working directory
 WORKDIR /app
@@ -13,10 +14,12 @@ RUN yarn install
 COPY . .
 
 # Build the ViteJS React project
-RUN yarn run build
+RUN yarn run build-testing
 
 # Expose port
-EXPOSE 3000
+#EXPOSE 3000
+
+RUN npm install serve -g
 
 # Command to run the application
-CMD ["yarn", "run", "serve"]
+CMD ["yarn","run","serve"]

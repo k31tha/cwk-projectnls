@@ -7,6 +7,7 @@
     "dev": "vite",
     "testing": "cross-env NODE_ENV=testing vite --mode testing",
     "build": "tsc && vite build",
+    "build-testing": "tsc && vite build --mode testing",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "check-types": "tsc",
@@ -14,7 +15,8 @@
     "prettier": "prettier --write ./src",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "ui": "vitest --ui"
+    "ui": "vitest --ui",
+    "serve": "serve -s dist"
   },
   "dependencies": {
     "react": "^18.2.0",
