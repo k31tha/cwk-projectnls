@@ -13,6 +13,10 @@ export default defineConfig(({mode}) => {
     server: {
       port: 3000,
     },
+    preview: {
+      port: 3000,
+      host: true,
+    },
     plugins: [react(), eslint()],
     test: {
       globals: true,

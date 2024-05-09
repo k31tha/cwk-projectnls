@@ -19,7 +19,8 @@ RUN yarn run build-testing
 # Expose port
 #EXPOSE 3000
 
-RUN npm install serve -g
+#RUN npm install serve -g
 
 # Command to run the application
-CMD ["yarn","run","serve"]
+#CMD ["yarn","run","serve"]
+CMD ["yarn","run","preview"]
