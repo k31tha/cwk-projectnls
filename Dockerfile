@@ -1,5 +1,5 @@
 # Use the official Node.js image
-FROM mcr.microsoft.com/playwright:bionic
+FROM mcr.microsoft.com/playwright:v1.40.0-jammy
 
 # Set working directory
 WORKDIR /app
