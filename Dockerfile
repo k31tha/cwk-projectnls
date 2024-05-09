@@ -1,5 +1,5 @@
 # Use the official Node.js image
-FROM node:latest
+FROM mcr.microsoft.com/playwright:bionic
 
 # Set working directory
 WORKDIR /app
@@ -7,7 +7,7 @@ WORKDIR /app
 # Install dependencies
 COPY package*.json ./
 RUN yarn install
-RUN npx playwright install --with-deps       
+#RUN npx playwright install --with-deps       
 
 # Copy the rest of the application code
 COPY . .
