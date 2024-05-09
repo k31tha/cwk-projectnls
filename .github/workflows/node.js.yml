@@ -23,6 +23,8 @@ jobs:
         run: docker run -d -p 3000:3000 --name cwk-projectnls cwk-projectnls
       - name: Wait for container to start
         run: sleep 10
+      - name: install playwright
+        run: npx playwright install
       - name: Run your tests
         run: npx playwright test
       - name: Stop Docker container
