@@ -7,6 +7,7 @@ WORKDIR /app
 # Install dependencies
 COPY package*.json ./
 RUN yarn install
+RUN npx playwright install       
 
 # Copy the rest of the application code
 COPY . .
