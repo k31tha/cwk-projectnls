@@ -8,8 +8,6 @@ jobs:
   playwright:
     name: 'Playwright Tests'
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.41.1-jammy
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -17,9 +15,17 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: yarn install
-      - name: Run the web application
-        run: yarn testing
+      - name: Run build
+        run: yarn build
+      - name: Build Docker image
+        run: docker build -t cwk-projectnls .
+      - name: Start Docker container
+        run: docker run -d -p 3000:3000 --name cwk-projectnls cwk-projectnls
+      - name: Wait for container to start
+        run: sleep 10
       - name: Run your tests
         run: npx playwright test
-        env:
-          HOME: /root
+      - name: Stop Docker container
+        run: docker stop cwk-projectnls
+      - name: Remove Docker container
+        run: docker rm cwk-projectnls
