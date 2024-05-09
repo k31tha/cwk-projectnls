@@ -1,4 +1,4 @@
-import {expect, it} from 'vitest';
+import {it} from 'vitest';
 import {getMessageStub500Err} from '../getMessage';
 describe('Testing message fetch with mock', () => {
   it('Fetch message from stub', async () => {
