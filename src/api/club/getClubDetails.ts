@@ -11,12 +11,13 @@ const clubDetailSchema = z.object({
   Source: z.string().nullable(),
   ClubPostcode: z.string().nullable(),
   UrlFriendlyName: z.string().nullable(),
+  ClubWikiLink: z.string().nullable(),
   PyramidId: z.string().nullable(),
   Nicknames: z.string().nullable(),
   Active: z.boolean().nullable(),
   ClubGuid: z.string().nullable(),
   MinorClub: z.boolean().nullable(),
-  DisableAutoUpdate: z.boolean(),
+  DisableAutoUpdate: z.boolean().default(false),
   StatusTypeId: z.number().nullable(),
 });
 
@@ -35,7 +36,9 @@ export async function getClubDetails(urlFriendlyName: string) {
     };
   } else {
     const json = await response.json();
+    //console.dir(json);
     const clubDetailResult = clubDetailSchema.safeParse(json);
+    console.dir(clubDetailResult);
     return {
       clubDetail: clubDetailResult,
       response: response,
