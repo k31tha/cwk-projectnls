@@ -38,7 +38,7 @@ test('club page of app for club woking', async ({page}) => {
 
   // Expect a title "to contain" a substring.
   //await expect(page).toHaveTitle(/Playwright/);
-  await expect(page.getByText('woking')).toBeVisible();
+  await expect(page.getByRole('heading', {name: 'Woking'})).toBeVisible();
 });
 
 test('club page of app for club knaphill', async ({page}) => {
@@ -46,7 +46,7 @@ test('club page of app for club knaphill', async ({page}) => {
 
   // Expect a title "to contain" a substring.
   //await expect(page).toHaveTitle(/Playwright/);
-  await expect(page.getByText('knaphill fc')).toBeVisible();
+  await expect(page.getByRole('heading', {name: 'knaphill fc'})).toBeVisible();
 });
 
 test('navigate down to a club from route page', async ({page}) => {
@@ -57,7 +57,7 @@ test('navigate down to a club from route page', async ({page}) => {
   await expect(page.getByText('club search')).toBeVisible();
   //await page.click('text=club/woking-fc');
   await page.getByRole('link', {name: 'woking'}).click();
-  await expect(page.getByText('woking')).toBeVisible();
+  await expect(page.getByRole('heading', {name: 'Woking'})).toBeVisible();
 });
 
 //test('get started link', async ({page}) => {
