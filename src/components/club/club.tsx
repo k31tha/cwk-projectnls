@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
-import {getClubDetails} from '../../api/club/getClubDetails';
-import {ClubDetail} from '../../api/club/getClubDetails';
+import {getClubDetails, ClubFullDetail} from '../../api/club/getClubDetails';
 import {ClubLogo} from './clubLogo';
 
 export const Club: React.FC = () => {
   const {urlFriendlyName} = useParams();
-  const [clubDetail, setClubDetail] = useState<ClubDetail | undefined>();
+  const [clubDetail, setClubDetail] = useState<ClubFullDetail | undefined>();
 
   useEffect(() => {
     getClubDetails(urlFriendlyName as string).then(response => {

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider, Link} from 'react-router-dom';
 import ErrorPage from './components/error/ErrorPage';
 import {Club} from './components/club/club';
+import {ClubSearch} from './components/club/clubSearch';
 
 import Layout from './components/structure/Layout';
 const router = createBrowserRouter([
@@ -21,16 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'club',
-        element: (
-          <>
-            <div>club search</div>
-            <ul>
-              <li>
-                <Link to={`/club/woking`}>woking</Link>
-              </li>
-            </ul>
-          </>
-        ),
+        element: <ClubSearch />,
       },
       {
         path: 'blog',
@@ -56,7 +48,7 @@ async function enableMocking() {
   console.dir(import.meta.env);
   if (
     process.env.NODE_ENV !== 'development' &&
-    process.env.NODE_ENV !== 'testing!'
+    process.env.NODE_ENV !== '!testing'
   ) {
     return;
   }

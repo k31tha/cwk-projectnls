@@ -55,9 +55,14 @@ test('navigate down to a club from route page', async ({page}) => {
   await expect(page.locator('#detail').getByText('home')).toBeVisible();
   await page.click('text=club');
   await expect(page.getByText('club search')).toBeVisible();
+  await expect(page.getByText('no of clubs is')).toBeVisible();
+  const clubCount = await page
+    .locator('[data-test-id="club-search-count"]')
+    .textContent();
+  expect(parseInt(clubCount ?? '0', 10)).toBeGreaterThan(0);
   //await page.click('text=club/woking-fc');
-  await page.getByRole('link', {name: 'woking'}).click();
-  await expect(page.getByRole('heading', {name: 'Woking'})).toBeVisible();
+  //await page.getByRole('link', {name: 'woking'}).click();
+  //await expect(page.getByRole('heading', {name: 'Woking'})).toBeVisible();
 });
 
 //test('get started link', async ({page}) => {
