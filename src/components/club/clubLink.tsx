@@ -5,8 +5,10 @@ export const ClubLink: React.FC<{
   active: boolean | undefined | null;
 }> = ({url, name, active}) => {
   return (
-    <li className={active ? '' : ' InActiveClub'} key={name}>
-      <Link to={'/club/' + url}>{name}</Link>
+    <li key={name}>
+      <Link to={'/club/' + url} className={active ? '' : ' InActiveClub'}>
+        {name}
+      </Link>
     </li>
   );
 };

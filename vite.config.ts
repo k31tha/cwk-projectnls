@@ -23,7 +23,11 @@ export default defineConfig(({mode}) => {
       environment: 'jsdom',
       setupFiles: './src/tests/setup.js',
       passWithNoTests: true,
-      include: ['./src/tests/**/*.tsx', './src/**/tests/**/*.ts'],
+      include: [
+        './src/tests/**/*.tsx',
+        './src/**/tests/**/*.ts',
+        './src/**/tests/**/*.tsx',
+      ],
       coverage: {
         reporter: ['text', 'json', 'html'],
         provider: 'istanbul',
