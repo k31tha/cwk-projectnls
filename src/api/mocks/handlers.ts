@@ -21,7 +21,7 @@ export const handlers = [
       });
     }
   }),
-  http.get(API_URL + '/api/v2/ClubApi/ClubList', ({request}) => {
+  http.get(API_URL + '/api/v2/ClubApi/ClubList', () => {
     const response = [
       {
         ClubLogoExists: true,
