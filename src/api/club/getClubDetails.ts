@@ -46,7 +46,7 @@ export async function getClubDetails(urlFriendlyName: string) {
     const json = await response.json();
     //console.dir(json);
     const clubDetailResult = clubFullDetailSchema.safeParse(json);
-    console.dir(clubDetailResult);
+    //console.dir(clubDetailResult);
     return {
       clubDetail: clubDetailResult,
       response: response,

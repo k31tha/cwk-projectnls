@@ -9,6 +9,8 @@ expect.extend(matchers);
 beforeAll(() => server.listen());
 afterAll(() => server.close());
 afterEach(() => {
+  //console.dir(server);
+  //console.log('resetting handlers');
   server.resetHandlers();
   cleanup();
 });

@@ -22,7 +22,7 @@ export const clubDetailSchema = z.object({
 });
 
 export const clubsSchema = z.array(clubDetailSchema);
-
+export type ClubDetail = z.infer<typeof clubDetailSchema>;
 export type Clubs = z.infer<typeof clubsSchema>;
 const API_URL = import.meta.env.VITE_BASE_NLS_API_URL;
 export async function getClubs() {
@@ -37,7 +37,7 @@ export async function getClubs() {
     const json = await response.json();
     //console.dir(json);
     const clubsResult = clubsSchema.safeParse(json);
-    console.dir(clubsResult);
+    //console.dir(clubsResult);
     return {
       clubs: clubsResult,
       response: response,
