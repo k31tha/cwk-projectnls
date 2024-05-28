@@ -16,13 +16,15 @@ export const ClubSearch: React.FC = () => {
     setSearchClubName(e.target.value);
   };
 
+  const clubsString = JSON.stringify(clubs);
   useEffect(() => {
-    getClubs().then(response => {
-      //console.log('getClubs response!!', response.clubs);
-      setClubs(response.clubs?.success ? response.clubs.data : undefined);
-      console.log(clubs);
-    });
-  }, [clubs]);
+    const getClubsData = async () => {
+      getClubs().then(response => {
+        setClubs(response.clubs?.success ? response.clubs.data : undefined);
+      });
+    };
+    getClubsData();
+  }, [clubsString]);
   if (!clubs || clubs.length === 0) {
     return <div>No clubs found</div>;
   }
