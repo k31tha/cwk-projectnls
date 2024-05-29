@@ -1,4 +1,4 @@
-import {render, screen, fireEvent} from '@testing-library/react';
+import {render, screen, fireEvent, waitFor} from '@testing-library/react';
 import {ClubSearch} from '../clubSearch';
 import {test, describe} from 'vitest';
 import {MemoryRouter} from 'react-router-dom';
@@ -16,13 +16,19 @@ describe('ClubDetails', () => {
       </MemoryRouter>,
     );
 
+    //const searchInput = await screen.findByRole<HTMLInputElement>('textbox', {
+    //  name: /club-search/i,
+    //});
+    //console.dir(searchInput);
+    await waitFor(() =>
+      expect(
+        screen.getByRole<HTMLInputElement>('textbox', {name: /club-search/i}),
+      ).toBeInTheDocument(),
+    );
+    //console.dir(screen);
     const searchInput = await screen.findByRole<HTMLInputElement>('textbox', {
       name: /club-search/i,
     });
-    //console.dir(searchInput);
-    //await waitFor(() => {
-    //expect(searchInput).toBeInTheDocument();
-    //});
     expect(screen.getByRole('link', {name: /woking/i})).toBeInTheDocument();
     expect(
       screen.getByRole('link', {name: /knaphill fc/i}),
