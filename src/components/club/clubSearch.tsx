@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {getClubs, Clubs} from '../../api/club/getClubs';
+import {useState} from 'react';
 import {ClubLinkList} from './clubLinkList';
 import {filterByClubName} from '../../bll/filters/club/filterByClubName';
+import {useClubs} from '../../hooks/useClubs';
 
 export const ClubSearch: React.FC = () => {
-  const [loadingStatus, setLoadingStatus] = useState<string>('pending');
-  const [clubs, setClubs] = useState<Clubs | undefined>();
+  const [{clubs, loadingStatus, isError}] = useClubs();
   const [searchClubName, setSearchClubName] = useState<string>('');
 
   //function handleSearchNameChange(e) {
@@ -16,21 +15,6 @@ export const ClubSearch: React.FC = () => {
   > = e => {
     setSearchClubName(e.target.value);
   };
-
-  const clubsString = JSON.stringify(clubs);
-  useEffect(() => {
-    const getClubsData = async () => {
-      setLoadingStatus('loading');
-      getClubs().then(response => {
-        setClubs(response.clubs?.success ? response.clubs.data : undefined);
-        setLoadingStatus('success');
-      });
-    };
-    getClubsData();
-  }, [clubsString]);
-  //if (!clubs || clubs.length === 0) {
-  // return <div>No clubs found</div>;
-  //}
 
   const filteredList = clubs
     ?.filter(filterByClubName(searchClubName))
