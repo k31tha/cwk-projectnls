@@ -1,21 +1,29 @@
-import {useEffect, useState} from 'react';
-import {getClubs, Clubs} from '../api/club/getClubs';
+import {useEffect, useReducer} from 'react';
+import {getClubs} from '../api/club/getClubs';
+import {clubsReducer} from '../reducers/clubsReducer';
+//import {boolean, string} from 'zod';
 export const useClubs = () => {
-  const [loadingStatus, setLoadingStatus] = useState<string>('pending');
-  const [clubs, setClubs] = useState<Clubs | undefined>();
-  const [isError, setIsError] = useState<boolean>(false);
-
-  const clubsString = JSON.stringify(clubs);
+  const [state, dispatch] = useReducer(clubsReducer, {
+    isError: false,
+    loadingStatus: 'loading',
+    clubs: [],
+  });
   useEffect(() => {
-    const getClubsData = async () => {
-      setLoadingStatus('loading');
+    async function getClubsData() {
+      dispatch({type: 'FETCH_INIT'});
+      //setLoadingStatus('loading');
       getClubs().then(response => {
-        setClubs(response.clubs?.success ? response.clubs.data : undefined);
-        setLoadingStatus('success');
+        //setClubs(response.clubs?.success ? response.clubs.data : undefined);
+        //setLoadingStatus('success');
+        dispatch({
+          type: 'FETCH_SUCCESS',
+          payload: response.clubs?.success ? response.clubs.data : undefined,
+        });
       });
-    };
+    }
     getClubsData();
-  }, [clubsString]);
+  }, []);
+  //}, [clubsString]);
 
-  return [{clubs, loadingStatus, isError}];
+  return [state];
 };

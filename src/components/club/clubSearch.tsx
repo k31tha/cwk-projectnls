@@ -24,7 +24,7 @@ export const ClubSearch: React.FC = () => {
     return <div>loading component</div>;
   } else if (loadingStatus === 'loading') {
     return <div>loading clubs</div>;
-  } else if (loadingStatus === 'error') {
+  } else if (loadingStatus === 'error' || isError) {
     return <div>error occured</div>;
   } else if (loadingStatus === 'success') {
     return (
