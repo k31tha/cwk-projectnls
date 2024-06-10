@@ -234,6 +234,64 @@ export const handlers = [
           StatusTypeId: 1,
         };
         return HttpResponse.json(responseData);
+      } else if (urlFriendlyName === 'abbey-rangers-fc') {
+        const responseData = {
+          ClubSocialLinks: [
+            {
+              ClubSocialID: 3219,
+              SocialMedia_SocialMediaID: 10,
+              SocialURL: 'https://en.wikipedia.org/wiki/Abbey_Rangers_F.C.',
+              OwnerType: 'O',
+              Active: true,
+              Club_ClubID: 2423,
+              ClubGuid: null,
+              SocialName: 'wikipedia',
+            },
+            {
+              ClubSocialID: 3906,
+              SocialMedia_SocialMediaID: 2,
+              SocialURL: 'https://twitter.com/fc_abbeyrangers',
+              OwnerType: 'O',
+              Active: true,
+              Club_ClubID: 2423,
+              ClubGuid: null,
+              SocialName: 'twitter',
+            },
+          ],
+          ClubAssets: [
+            {
+              ClubAssetID: 67,
+              AssetName: 'ClubBadge',
+              AssetType: '0',
+              AssetData: 'AbbeyRangersFCLogo.png',
+              Club_ClubID: 2423,
+              ClubAssetGuid: '2e2be942-437a-46c3-84c7-6c1deb53b5dd',
+              Active: true,
+              ClubGuid: '00000000-0000-0000-0000-000000000000',
+              AssetContent: null,
+            },
+          ],
+          ClubLogoExists: true,
+          ClubLogo: 'AbbeyRangersFCLogo.png',
+          ClubWikiLink: 'https://en.wikipedia.org/wiki/Abbey_Rangers_F.C.',
+          ClubID: 2423,
+          ClubName: 'Abbey Rangers FC',
+          ClubAddress: 'Addlestone Moor, Addlestone, Surrey, KT15 2QH',
+          ContactEmailAddr: null,
+          MainWebsite: 'https://www.abbeyrangers.co.uk/',
+          LongLat: null,
+          Source: null,
+          ClubPostcode: null,
+          UrlFriendlyName: 'abbey-rangers-fc',
+          PyramidId: '1193',
+          Nicknames: 'The Abbey',
+          Active: true,
+          ClubGuid: '73a1f8cc-cac4-4e6d-8044-7fd1a66f3c92',
+          MinorClub: null,
+          DisableAutoUpdate: null,
+          StatusTypeId: 1,
+        };
+        return HttpResponse.json(responseData);
       } else {
         return new HttpResponse(null, {
           status: 404,

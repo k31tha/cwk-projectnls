@@ -21,7 +21,7 @@ import {z} from 'zod';
   DisableAutoUpdate: z.boolean().default(false),
   StatusTypeId: z.number().nullable(),
 });*/
-const clubFullDetailSchema = z.intersection(
+export const clubFullDetailSchema = z.intersection(
   clubDetailSchema,
   z.object({
     ClubLogo: z.string().nullable(),

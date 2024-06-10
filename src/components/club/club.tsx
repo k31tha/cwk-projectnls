@@ -1,19 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
-import {getClubDetails, ClubFullDetail} from '../../api/club/getClubDetails';
+//import {getClubDetails, ClubFullDetail} from '../../api/club/getClubDetails';
+import {useClub} from '../../hooks/useClub';
 import {ClubLogo} from './clubLogo';
 
 export const Club: React.FC = () => {
   const {urlFriendlyName} = useParams();
-  const [clubDetail, setClubDetail] = useState<ClubFullDetail | undefined>();
+  //const [clubDetail, setClubDetail] = useState<ClubFullDetail | undefined>();
+  const [{clubDetail, loadingStatus, isError}] = useClub(urlFriendlyName ?? '');
 
-  useEffect(() => {
-    getClubDetails(urlFriendlyName as string).then(response => {
-      setClubDetail(
-        response.clubDetail?.success ? response.clubDetail.data : undefined,
-      );
-    });
-  }, [urlFriendlyName]);
+  //useEffect(() => {
+  //  getClubDetails(urlFriendlyName as string).then(response => {
+  //    setClubDetail(
+  //      response.clubDetail?.success ? response.clubDetail.data : undefined,
+  //    );
+  //  });
+  //}, [urlFriendlyName]);
+  if (loadingStatus === 'pending') {
+    return <div>loading component</div>;
+  } else if (loadingStatus === 'loading') {
+    return <div>loading clubs</div>;
+  } else if (loadingStatus === 'error' || isError) {
+    return <div>error occured</div>;
+  }
   if (!clubDetail) {
     return <div>Club not found</div>;
   } else if (clubDetail.ClubID === 0) {
