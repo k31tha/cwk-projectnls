@@ -1,5 +1,5 @@
 import {useEffect, useReducer} from 'react';
-import {getClubs} from '../api/club/getClubs';
+import {getClubs, Clubs} from '../api/club/getClubs';
 import {clubsReducer} from '../reducers/clubsReducer';
 //import {boolean, string} from 'zod';
 export const useClubs = () => {
@@ -11,13 +11,10 @@ export const useClubs = () => {
   useEffect(() => {
     async function getClubsData() {
       dispatch({type: 'FETCH_INIT'});
-      //setLoadingStatus('loading');
-      getClubs().then(response => {
-        //setClubs(response.clubs?.success ? response.clubs.data : undefined);
-        //setLoadingStatus('success');
+      await getClubs().then(response => {
         dispatch({
-          type: 'FETCH_SUCCESS',
-          payload: response.clubs?.success ? response.clubs.data : undefined,
+          type: response.response.ok ? 'FETCH_SUCCESS' : 'FETCH_FAILURE',
+          payload: response.response.ok ? (response.clubs as Clubs) : undefined,
         });
       });
     }

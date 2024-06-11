@@ -288,7 +288,7 @@ export const handlers = [
           Active: true,
           ClubGuid: '73a1f8cc-cac4-4e6d-8044-7fd1a66f3c92',
           MinorClub: null,
-          DisableAutoUpdate: null,
+          DisableAutoUpdate: false,
           StatusTypeId: 1,
         };
         return HttpResponse.json(responseData);

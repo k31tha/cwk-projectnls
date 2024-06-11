@@ -1,5 +1,6 @@
 import {clubDetailSchema} from './getClubs';
 import {z} from 'zod';
+import {safeParseApi} from '../generic/callApi';
 
 /*const clubFullDetailSchema = z.object({
   ClubID: z.number(),
@@ -32,24 +33,19 @@ export const clubFullDetailSchema = z.intersection(
 export type ClubFullDetail = z.infer<typeof clubFullDetailSchema>;
 const API_URL = import.meta.env.VITE_BASE_NLS_API_URL;
 export async function getClubDetails(urlFriendlyName: string) {
-  const response = await fetch(
+  // const response = await fetch(
+  //  `${API_URL}/api/v2/clubapi/clubfulldetail/${urlFriendlyName}`,
+  //  {},
+  //);
+  const response = await safeParseApi<ClubFullDetail>(
     `${API_URL}/api/v2/clubapi/clubfulldetail/${urlFriendlyName}`,
-    {},
+    clubFullDetailSchema,
+    {method: 'GET'},
   );
+  //console.log(response);
 
-  if (response.status !== 200) {
-    return {
-      clubDetail: null,
-      response: response,
-    };
-  } else {
-    const json = await response.json();
-    //console.dir(json);
-    const clubDetailResult = clubFullDetailSchema.safeParse(json);
-    //console.dir(clubDetailResult);
-    return {
-      clubDetail: clubDetailResult,
-      response: response,
-    };
-  }
+  return {
+    clubDetail: response.ok ? response.data : null,
+    response: response,
+  };
 }

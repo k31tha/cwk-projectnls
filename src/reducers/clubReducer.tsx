@@ -1,4 +1,4 @@
-import {getClubDetails, ClubFullDetail} from '../api/club/getClubDetails';
+import {ClubFullDetail} from '../api/club/getClubDetails';
 
 export const initialState = {
   isError: false,
